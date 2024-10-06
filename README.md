@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # seyahat
 
 A new Flutter project.
@@ -14,3 +15,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# Seyahat
+Seyahat is a Flutter-based tourist app that helps users explore destinations and manage their trips easily. It focuses on providing a smooth and enjoyable travel experience.
+>>>>>>> 80d93fa18e3a14913746963230ae4b042261941c

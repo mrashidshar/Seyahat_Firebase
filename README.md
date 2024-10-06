@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 # seyahat
 
-A new Flutter project.
+A new Flutter project Seyahat.
 
 ## Getting Started
 
@@ -18,4 +17,3 @@ samples, guidance on mobile development, and a full API reference.
 =======
 # Seyahat
 Seyahat is a Flutter-based tourist app that helps users explore destinations and manage their trips easily. It focuses on providing a smooth and enjoyable travel experience.
->>>>>>> 80d93fa18e3a14913746963230ae4b042261941c

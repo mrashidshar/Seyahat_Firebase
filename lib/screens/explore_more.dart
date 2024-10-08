@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:seyahat/widgets/bottomnavbar.dart';
+import 'package:seyahat/widgets/bottomnavbar.dart'; // Ensure the import path is correct
 import 'package:seyahat/widgets/userprofile_widget.dart';
 
-class ExploreMoreScreen extends StatelessWidget {
+class ExploreMoreScreen extends StatefulWidget {
   final String placeName;
   final String imagePath;
   final String description;
-  final String username; // Add username as a parameter
+  final String username;
 
   const ExploreMoreScreen({
-    super.key,
+    super.key, // Using the Key parameter for widget identification
     required this.placeName,
     required this.imagePath,
     required this.description,
-    required this.username, // Make sure to require it
-  }); // Constructor initialization
+    required this.username,
+  }); // Pass key to the superclass
+
+  @override
+  ExploreMoreScreenState createState() => ExploreMoreScreenState(); // Correct synchronous usage
+}
+
+class ExploreMoreScreenState extends State<ExploreMoreScreen> { // Changed to public
+  int _selectedIndex = 0; // Initialize the selected index
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index; // Update the selected index
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,17 +45,17 @@ class ExploreMoreScreen extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            UserProfile(username: username), // Use the username here
+            UserProfile(username: widget.username), // Use the username here
           ],
         ),
       ),
-      body: SingleChildScrollView( // Make the body scrollable
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Main Image
             Image.asset(
-              imagePath, // Use the passed image path
+              widget.imagePath,
               width: double.infinity,
               height: 200,
               fit: BoxFit.cover,
@@ -79,7 +92,7 @@ class ExploreMoreScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                placeName, // Use the passed place name
+                widget.placeName,
                 style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
               ),
             ),
@@ -87,15 +100,17 @@ class ExploreMoreScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                description, // Use the passed description
-                style: const TextStyle(fontSize: 16, color: Colors.grey), // Use const for style consistency
+                widget.description,
+                style: const TextStyle(fontSize: 16, color: Colors.grey),
               ),
             ),
           ],
         ),
       ),
-      // Use your custom BottomNavBar widget
-      bottomNavigationBar: const BottomNavBar(),
+      bottomNavigationBar: BottomNavBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seyahat/screens/forgot_password.dart';
+import 'package:seyahat/screens/user_dashboard.dart';
 import 'package:seyahat/screens/user_role_selection.dart';
 import '../widgets/password_field.dart';
 import '../widgets/custom_text_field.dart';
@@ -67,6 +68,13 @@ class LoginPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Handle login functionality
+                // After validation, navigate to UserDashboard
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DashboardScreen(username: '',), // Replace with the actual dashboard screen
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF1A76D2),

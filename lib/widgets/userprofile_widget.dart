@@ -10,20 +10,21 @@ class UserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen width for responsive design
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Row(
       children: [
-        // Display Username
-        const SizedBox(width: 12), // Space between text and icon
+        SizedBox(width: screenWidth * 0.03), // Responsive space
         Text(
           username,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 16,
-            color: Colors.grey, // Set to gray
+            fontSize: screenWidth * 0.04, // Responsive font size
+            color: Colors.grey,
           ),
         ),
-        const SizedBox(width: 12), // Space between text and icon
-        // Profile Icon
+        SizedBox(width: screenWidth * 0.03), // Responsive space between text and icon
         const CircleAvatar(
           backgroundColor: Colors.blueAccent,
           child: Icon(Icons.person, color: Colors.white),

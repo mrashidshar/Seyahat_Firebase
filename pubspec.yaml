@@ -12,11 +12,15 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
+  emoji_picker_flutter: ^2.0.0  # Update to the latest version
+
+
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
@@ -32,6 +36,7 @@ flutter:
     - assets/success.png
     - assets/view.png
     - assets/explore.png
+    - assets/user.png
 
   # You can add more assets like:
   # - assets/image1.png

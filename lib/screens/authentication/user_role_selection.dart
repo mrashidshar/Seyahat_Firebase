@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:seyahat/screens/user_signup_page.dart';
+import 'package:seyahat/screens/authentication/user_signup_page.dart';
+
 
 class UserRoleSelection extends StatelessWidget {
   const UserRoleSelection({super.key});

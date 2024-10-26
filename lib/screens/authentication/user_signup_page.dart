@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seyahat/screens/success_page.dart';
+import 'package:seyahat/screens/authentication/success_page.dart';
 import 'package:seyahat/widgets/custom_text_field.dart';
 import 'package:seyahat/widgets/password_field.dart';
 

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:seyahat/screens/SearchGuide/search_guide.dart';
 import 'package:seyahat/screens/authentication/login_page.dart';
 import 'package:seyahat/screens/messages_list.dart';
 import 'package:seyahat/screens/user_setting.dart';
+import 'package:seyahat/screens/search_guide_screen.dart';
+
 import 'package:seyahat/screens/notifications_screen.dart';
 import 'package:seyahat/widgets/bottomnavbar.dart';
 import 'package:seyahat/widgets/suggested_place_card_widget.dart';
 import 'package:seyahat/widgets/userprofile_widget.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+final String username; // Add this line
 
-  @override
-  _MainScreenState createState() => _MainScreenState();
+const MainScreen({super.key, required this.username}); // Modify constructor
+
+@override
+_MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
@@ -48,10 +51,10 @@ class _MainScreenState extends State<MainScreen> {
 
     // List of screens to display
     final List<Widget> _screens = [
-      const DashboardScreen(username: 'Hanood'), // Home screen
-      const ExploreGuidesScreen(),                // Search screen
+      const DashboardScreen(username: ''), // Home screen
+      const SearchGuideScreen(),                // Search screen
       const NotificationScreen(),                 // Notifications screen
-      const UserSettingsPage(),                   // Settings screen
+      const UserSettingsPage(),                  // Settings screen
       const MessagesList(),                     // Messages screen
     ];
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:seyahat/widgets/userprofile_widget.dart';
 import 'package:seyahat/widgets/suggested_place_card_widget.dart';
 
+
 class DashboardScreen extends StatelessWidget {
   final String username;
 
@@ -28,6 +29,7 @@ class DashboardScreen extends StatelessWidget {
         ),
       ),
       body: const DashboardBody(), // Render the appropriate screen without BottomNavBar
+
     );
   }
 }
@@ -67,6 +69,8 @@ class DashboardBody extends StatelessWidget {
           ),
         ],
       ),
+
     );
+
   }
 }

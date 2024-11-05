@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:seyahat/screens/authentication/success_page.dart';
 import 'package:seyahat/widgets/custom_text_field.dart';
 import 'package:seyahat/widgets/password_field.dart';
+import 'package:seyahat/models/user_model.dart';
+import '../../services/user_service.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+   SignUpPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -78,8 +81,9 @@ class SignUpPage extends StatelessWidget {
             const SizedBox(height: 45),
             ElevatedButton(
               onPressed: () {
-                // Handle sign-up functionality
+                print("button pressed");
                 _handleSignUp(context, usernameController, emailController, passwordController);
+
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF1A76D2),
@@ -88,21 +92,24 @@ class SignUpPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
+
               child: const Text(
                 'Sign Up',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white,
                 ),
+
               ),
+
             ),
           ],
         ),
       ),
     );
   }
-
-  void _handleSignUp(BuildContext context, TextEditingController usernameController, TextEditingController emailController, TextEditingController passwordController) {
+  UserService userService = UserService();
+  void _handleSignUp(BuildContext context, TextEditingController usernameController, TextEditingController emailController, TextEditingController passwordController) async {
     if (usernameController.text.isEmpty || emailController.text.isEmpty || passwordController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -111,14 +118,44 @@ class SignUpPage extends StatelessWidget {
         ),
       );
     } else {
-      // Pass the username to the SuccessPage
+
       String username = usernameController.text;
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SuccessPage(username: username), // Pass username here
-        ),
+      String email = emailController.text;
+      String password = passwordController.text;
+
+      // Create a user map to send to Firestore
+      Users newUser = Users(id:"",
+          name: username,
+          email: email,
+          // Optionally include password if you want to store it (not recommended)
+          password: password,
+          type:"tourist"
       );
+
+      // Save user data to Firestore
+      try {
+        await userService.addUser(newUser); // Adjust this method to accept a Map
+        print("User data saved successfully"); // Log success
+
+        // Navigate to SuccessPage
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SuccessPage(username: username),
+          ),
+        );
+      } catch (e) {
+        print("Error saving user data: $e"); // Log error
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to save data. Please try again.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
   }
+
 }
+
+

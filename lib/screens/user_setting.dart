@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:seyahat/widgets/review_card_widget.dart';
 import 'package:seyahat/widgets/userprofile_widget.dart';
 
 class UserSettingsPage extends StatelessWidget {
@@ -87,7 +86,6 @@ class UserSettingsPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       // Handle save changes
-                      print("Changes saved");
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue, // Button color

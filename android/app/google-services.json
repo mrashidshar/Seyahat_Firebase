@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "312315369066",
+    "project_id": "seyahat-firebase",
+    "storage_bucket": "seyahat-firebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312315369066:android:8d4d9665d4b5419b299c13",
+        "android_client_info": {
+          "package_name": "com.example.seyahat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa-0OOCkRH1qEm2wTSFWwgITMWnO0BUNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

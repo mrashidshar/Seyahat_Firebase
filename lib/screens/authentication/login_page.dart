@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:seyahat/screens/authentication/forgot_password.dart';
 import 'package:seyahat/screens/authentication/user_role_selection.dart';
 import 'package:seyahat/widgets/custom_text_field.dart';
 import 'package:seyahat/widgets/password_field.dart';
+
+import '../main_screen.dart';
 
 class LoginPage extends StatelessWidget {
   final VoidCallback onLoginSuccess; // Callback for login success
@@ -35,21 +38,20 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 50),
-              CustomTextField( // CustomTextField for email input
+              CustomTextField(
                 controller: emailController,
-                hintText: 'Email', // Hint for the email field
+                hintText: 'Email',
                 prefixIcon: const Icon(Icons.email, color: Color(0xFF1A76D2)),
               ),
-              const SizedBox(height: 20), // Space between fields
+              const SizedBox(height: 20),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch, // Make the column stretch across the screen
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  PasswordTextField(controller: passwordController), // Custom password field
+                  PasswordTextField(controller: passwordController),
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                        // Navigate to ForgotPasswordPage
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -67,12 +69,10 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 50), // Space before the login button
+              const SizedBox(height: 50),
               ElevatedButton(
-                onPressed: () {
-                  // Handle login functionality here
-                  // Simulate successful login and call the callback
-                  onLoginSuccess(); // Call the login success callback
+                onPressed: () async {
+                  await _handleLogin(context, emailController.text, passwordController.text);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF1A76D2),
@@ -99,7 +99,6 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 5),
               GestureDetector(
                 onTap: () {
-                  // Navigate to the sign-up page
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -116,11 +115,71 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 40), // Space at the bottom
+              const SizedBox(height: 40),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _handleLogin(BuildContext context ,String email,String password) async {
+
+
+    try {
+      // Check in users collection
+      var userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .where('password', isEqualTo: password)
+          .get();
+
+      if (userSnapshot.docs.isNotEmpty) {
+        // User found in users collection
+        String username = userSnapshot.docs.first['name'];
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DashboardScreen(username: username),
+          ),
+        );
+        return; // Exit after successful login
+      }
+
+      // Check in guides collection
+      var guideSnapshot = await FirebaseFirestore.instance
+          .collection('guides')
+          .where('email', isEqualTo: email)
+          .where('password', isEqualTo: password)
+          .get();
+
+      if (guideSnapshot.docs.isNotEmpty) {
+        // Guide found in guides collection
+        String fullName = guideSnapshot.docs.first['fullName'];
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DashboardScreen(username: fullName),
+          ),
+        );
+        return; // Exit after successful login
+      }
+
+      // If no user or guide is found
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Invalid email or password. Please try again.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } catch (e) {
+      print("Error logging in: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error occurred. Please try again later.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 }

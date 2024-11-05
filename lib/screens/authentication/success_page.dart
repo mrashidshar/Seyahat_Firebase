@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:seyahat/screens/user_dashboard.dart';
+
+import 'login_page.dart';
 
 class SuccessPage extends StatelessWidget {
   final String username;
@@ -54,7 +55,7 @@ class SuccessPage extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DashboardScreen(username: username), // Pass the username
+                      builder: (context) => LoginPage(onLoginSuccess: () {  },), // Pass the username
                     ),
                   );
                 },
@@ -69,7 +70,7 @@ class SuccessPage extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  "Go to Dashboard", // Updated button text
+                  "Go to Login", // Updated button text
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.white,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:seyahat/screens/SearchGuide/guide_profile.dart';
+import 'package:seyahat/screens/guide_profile.dart';
 
 class GuideCard extends StatelessWidget {
   final String username;

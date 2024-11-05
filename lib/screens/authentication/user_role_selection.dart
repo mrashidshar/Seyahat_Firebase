@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:seyahat/screens/authentication/user_signup_page.dart';
 
+import 'guide_signup_page.dart';
+
 
 class UserRoleSelection extends StatelessWidget {
   const UserRoleSelection({super.key});
@@ -88,6 +90,12 @@ class UserRoleSelection extends StatelessWidget {
         children: [
           _buildRoleOption("Guide", 'assets/guide.png', () {
             // Navigate to Guide SignUp page (implement this page similarly)
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const GuideSignUpPage(), // Navigate to GuideSignup page
+              ),
+            );
           }),
           const SizedBox(height: 20),
           const Divider(
@@ -97,11 +105,11 @@ class UserRoleSelection extends StatelessWidget {
             endIndent: 10, // Right padding for the line
           ),
           const SizedBox(height: 20),
-          _buildRoleOption("User", 'assets/user.png', () {
+          _buildRoleOption("Tourist", 'assets/user.png', () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const SignUpPage(), // Navigate to UserSignup page
+                builder: (context) =>  SignUpPage(), // Navigate to UserSignup page
               ),
             );
           }),

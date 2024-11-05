@@ -50,7 +50,6 @@ class _MessageInputState extends State<MessageInput> {
                 icon: const Icon(Icons.person),
                 onPressed: () {
                   // Handle user profile action
-                  print('User profile tapped'); // Replace with actual action
                 },
               ),
             ],

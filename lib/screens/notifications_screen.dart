@@ -13,7 +13,6 @@ class NotificationScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back), // Back arrow icon
           onPressed: () {
-            print("Back button pressed");
             Navigator.pop(context); // Go back to the previous page
           },
         ),

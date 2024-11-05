@@ -8,9 +8,9 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Navigate to MainScreen after 5 seconds (for demo)
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const MainScreen()),
+        MaterialPageRoute(builder: (context) => const MainScreen(username: 'Guest')),
       ); // Navigate to main screen
     });
 
